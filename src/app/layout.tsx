@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
 import { Header } from "@/components/header";
+import { Flex } from "@chakra-ui/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +29,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider>
-          <Header />
-          {children}
+          <Flex direction="column" h="full">
+            <Header />
+            <Flex direction="column" flex="1">
+              {children}
+            </Flex>
+          </Flex>
         </Provider>
       </body>
     </html>
