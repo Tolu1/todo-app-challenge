@@ -12,10 +12,11 @@ import {
 import { TaskSquare, Status, TickCircle } from "iconsax-reactjs";
 import { TodoTable } from "@/components/todo/todo-table";
 import { EmptyState } from "@/components/ui/empty-state";
-import { todos } from "@/data/todos";
+import { useTodos } from "@/hooks/use-todos";
 
 export function TodoTabs() {
   const [activeTab, setActiveTab] = useState("todo");
+  const { todos } = useTodos();
 
   const todoItems = todos.filter((todo) => todo.status === "todo");
   const inProgressItems = todos.filter((todo) => todo.status === "in-progress");
