@@ -39,7 +39,7 @@ export function TodoTable({ todos, onUpdateTodo }: TodoTableProps) {
   };
 
   return (
-    <Stack h="full" border="1px solid #CDD6E9" rounded="10px" overflow="hidden">
+    <Stack flex="1" border="1px solid #CDD6E9" rounded="10px" overflow="hidden">
       <Table.Root unstyled tableLayout="fixed" w="100%">
         <Table.Header>
           <Table.Row

@@ -129,7 +129,13 @@ export function TodoTabs() {
         />
       </Tabs.List>
 
-      <Tabs.Content value="todo" flex="1" pt="10px">
+      <Tabs.Content
+        value="todo"
+        display="flex"
+        flexDir="column"
+        flex="1"
+        pt="10px"
+      >
         {todoItems.length === 0 ? (
           <Box pt="12vh" display="flex" justifyContent="center">
             <EmptyState
@@ -143,7 +149,13 @@ export function TodoTabs() {
         )}
       </Tabs.Content>
 
-      <Tabs.Content value="in-progress" flex="1" pt="10px">
+      <Tabs.Content
+        value="in-progress"
+        display="flex"
+        flexDir="column"
+        flex="1"
+        pt="10px"
+      >
         {inProgressItems.length === 0 ? (
           <Box pt="12vh" display="flex" justifyContent="center">
             <EmptyState
@@ -157,7 +169,13 @@ export function TodoTabs() {
         )}
       </Tabs.Content>
 
-      <Tabs.Content value="complete" flex="1" pt="10px">
+      <Tabs.Content
+        value="complete"
+        display="flex"
+        flexDir="column"
+        flex="1"
+        pt="10px"
+      >
         {completedItems.length === 0 ? (
           <Box pt="12vh" display="flex" justifyContent="center">
             <EmptyState
