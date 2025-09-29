@@ -10,7 +10,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
-import { Flag, More } from "iconsax-reactjs";
+import { Flag } from "iconsax-reactjs";
 import type { Todo } from "@/types/todo";
 
 interface TodoTableProps {
@@ -33,14 +33,18 @@ export function TodoTable({ todos }: TodoTableProps) {
 
   return (
     <Stack h="full" border="1px solid #CDD6E9" rounded="10px" overflow="hidden">
-      <Table.Root unstyled>
+      <Table.Root unstyled tableLayout="fixed" w="100%">
         <Table.Header>
           <Table.Row
             h="72px"
             bg="bg.secondary"
             borderBottom="1px solid #CDD6E9"
           >
-            <Table.ColumnHeader borderRight="2px solid #CDD6E999" pl="40px">
+            <Table.ColumnHeader
+              borderRight="2px solid #CDD6E999"
+              pl="40px"
+              w="30%"
+            >
               <Text
                 fontSize="14px"
                 fontWeight="700"
@@ -51,7 +55,11 @@ export function TodoTable({ todos }: TodoTableProps) {
                 Name
               </Text>
             </Table.ColumnHeader>
-            <Table.ColumnHeader borderRight="2px solid #CDD6E999" pl="14px">
+            <Table.ColumnHeader
+              borderRight="2px solid #CDD6E999"
+              pl="14px"
+              w="24%"
+            >
               <Text
                 fontSize="14px"
                 fontWeight="700"
@@ -62,7 +70,11 @@ export function TodoTable({ todos }: TodoTableProps) {
                 Date
               </Text>
             </Table.ColumnHeader>
-            <Table.ColumnHeader borderRight="2px solid #CDD6E999" pl="14px">
+            <Table.ColumnHeader
+              borderRight="2px solid #CDD6E999"
+              pl="14px"
+              w="18%"
+            >
               <Text
                 fontSize="14px"
                 fontWeight="700"
@@ -73,7 +85,7 @@ export function TodoTable({ todos }: TodoTableProps) {
                 Assignee
               </Text>
             </Table.ColumnHeader>
-            <Table.ColumnHeader pl="14px">
+            <Table.ColumnHeader pl="14px" w="28%">
               <Text
                 fontSize="14px"
                 fontWeight="700"
@@ -84,7 +96,6 @@ export function TodoTable({ todos }: TodoTableProps) {
                 Priority
               </Text>
             </Table.ColumnHeader>
-            <Table.ColumnHeader></Table.ColumnHeader>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -154,44 +165,46 @@ export function TodoTable({ todos }: TodoTableProps) {
                 </HStack>
               </Table.Cell>
               <Table.Cell pl="14px">
-                <HStack gap="14px">
-                  <Flag
-                    size="18"
-                    color={getPriorityColor(todo.priority)}
-                    variant="Bold"
-                  />
-                  <Text
-                    color="fg.muted"
-                    fontSize="14px"
-                    fontWeight="400"
-                    lineHeight="100%"
+                <HStack pr="20px">
+                  <HStack gap="14px">
+                    <Flag
+                      size="18"
+                      color={getPriorityColor(todo.priority)}
+                      variant="Bold"
+                    />
+                    <Text
+                      color="fg.muted"
+                      fontSize="14px"
+                      fontWeight="400"
+                      lineHeight="100%"
+                    >
+                      {todo.priority}
+                    </Text>
+                  </HStack>
+                  <Spacer />
+                  <IconButton
+                    aria-label="More actions"
+                    variant="surface"
+                    w="40px"
+                    h="30px"
+                    bg="bg.secondary"
+                    borderRadius="6px"
+                    boxShadow="none"
+                    textAlign="right"
                   >
-                    {todo.priority}
-                  </Text>
+                    <svg
+                      width="20"
+                      height="4"
+                      viewBox="0 0 20 4"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="2" cy="2" r="2" fill="#6C7278" />
+                      <circle cx="10" cy="2" r="2" fill="#6C7278" />
+                      <circle cx="18" cy="2" r="2" fill="#6C7278" />
+                    </svg>
+                  </IconButton>
                 </HStack>
-              </Table.Cell>
-              <Table.Cell textAlign="right" pr="20px">
-                <IconButton
-                  aria-label="More actions"
-                  variant="surface"
-                  w="40px"
-                  h="30px"
-                  bg="bg.secondary"
-                  borderRadius="6px"
-                  boxShadow="none"
-                >
-                  <svg
-                    width="20"
-                    height="4"
-                    viewBox="0 0 20 4"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="2" cy="2" r="2" fill="#6C7278" />
-                    <circle cx="10" cy="2" r="2" fill="#6C7278" />
-                    <circle cx="18" cy="2" r="2" fill="#6C7278" />
-                  </svg>
-                </IconButton>
               </Table.Cell>
             </Table.Row>
           ))}
