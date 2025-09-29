@@ -1,11 +1,23 @@
+"use client";
 import React from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Flex, Stack, HStack, Separator, Spacer } from "@chakra-ui/react";
 import TodoHeader from "@/components/todo/todo-header";
 import TodoSearchbar from "@/components/todo/todo-searchbar";
 import TodoViewToggle from "@/components/todo/todo-view-toggle";
 import { TodoTabs } from "@/components/todo/todo-tabs";
+import { TodoKanban } from "@/components/todo/todo-kanban";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const view = (searchParams.get("view") as "table" | "kanban") || "table";
+
+  const handleViewChange = (view: "table" | "kanban") => {
+    router.push(`/?view=${view}`);
+  };
+
   return (
     <Flex direction="column" pt="30px" pb="50px" px="50px" flex="1">
       <Stack flex="1" bg="bg" rounded="10px">
@@ -15,9 +27,9 @@ export default function Page() {
           <HStack p="10px" bg="brand.aquaLight" rounded="6px">
             <TodoSearchbar />
             <Spacer />
-            <TodoViewToggle />
+            <TodoViewToggle view={view} onViewChange={handleViewChange} />
           </HStack>
-          <TodoTabs />
+          {view === "table" ? <TodoTabs /> : <TodoKanban />}
         </Stack>
       </Stack>
     </Flex>
