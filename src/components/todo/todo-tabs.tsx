@@ -7,11 +7,19 @@ import {
   Center,
   Text as ChakraText,
   type TextProps,
+  Box,
 } from "@chakra-ui/react";
 import { TaskSquare, Status, TickCircle } from "iconsax-reactjs";
+import { TodoTable } from "@/components/todo/todo-table";
+import { EmptyState } from "@/components/ui/empty-state";
+import { todos } from "@/data/todos";
 
 export function TodoTabs() {
   const [activeTab, setActiveTab] = useState("todo");
+
+  const todoItems = todos.filter((todo) => todo.status === "todo");
+  const inProgressItems = todos.filter((todo) => todo.status === "in-progress");
+  const completedItems = todos.filter((todo) => todo.status === "complete");
 
   function getIndicatorColor(tab: string) {
     switch (tab) {
@@ -31,6 +39,9 @@ export function TodoTabs() {
       defaultValue="todo"
       variant="plain"
       onValueChange={(details) => setActiveTab(details.value)}
+      display="flex"
+      flexDir="column"
+      flex="1"
     >
       <Tabs.List w="full" bg="bg.secondary" rounded="6px" p="10px" gap="10px">
         <Tabs.Trigger value="todo">
@@ -54,7 +65,7 @@ export function TodoTabs() {
               </TabTitle>
             </HStack>
             <Center w="47px" h="32px" rounded="6px" bg="brand.indigoLight">
-              <TabCount>(20)</TabCount>
+              <TabCount>({todoItems.length})</TabCount>
             </Center>
           </HStack>
         </Tabs.Trigger>
@@ -81,7 +92,7 @@ export function TodoTabs() {
               </TabTitle>
             </HStack>
             <Center w="47px" h="32px" rounded="6px" bg="brand.orangeLight">
-              <TabCount>(23)</TabCount>
+              <TabCount>({inProgressItems.length})</TabCount>
             </Center>
           </HStack>
         </Tabs.Trigger>
@@ -106,7 +117,7 @@ export function TodoTabs() {
               </TabTitle>
             </HStack>
             <Center w="47px" h="32px" rounded="6px" bg="brand.aquaLight">
-              <TabCount>(18)</TabCount>
+              <TabCount>({completedItems.length})</TabCount>
             </Center>
           </HStack>
         </Tabs.Trigger>
@@ -116,9 +127,48 @@ export function TodoTabs() {
           boxShadow="none"
         />
       </Tabs.List>
-      <Tabs.Content value="todo">todo</Tabs.Content>
-      <Tabs.Content value="in-progress">in-progress</Tabs.Content>
-      <Tabs.Content value="complete">complete</Tabs.Content>
+
+      <Tabs.Content value="todo" flex="1" pt="10px">
+        {todoItems.length === 0 ? (
+          <Box pt="12vh" display="flex" justifyContent="center">
+            <EmptyState
+              icon={<TaskSquare size="48" color="#CFB7E8" variant="Bold" />}
+              title="Ready to Get Started"
+              description="Create your first task to start organizing your work."
+            />
+          </Box>
+        ) : (
+          <TodoTable todos={todoItems} />
+        )}
+      </Tabs.Content>
+
+      <Tabs.Content value="in-progress" flex="1" pt="10px">
+        {inProgressItems.length === 0 ? (
+          <Box pt="12vh" display="flex" justifyContent="center">
+            <EmptyState
+              icon={<Status size="48" color="#F6BE38" variant="Bold" />}
+              title="Nothing in Progress"
+              description="Move a task from your to-do list to start working on it."
+            />
+          </Box>
+        ) : (
+          <TodoTable todos={inProgressItems} />
+        )}
+      </Tabs.Content>
+
+      <Tabs.Content value="complete" flex="1" pt="10px">
+        {completedItems.length === 0 ? (
+          <Box pt="12vh" display="flex" justifyContent="center">
+            <EmptyState
+              icon={<TickCircle size="48" color="#75C5C1" variant="Bold" />}
+              title="No Completed Tasks Yet"
+              description="Your completed tasks will appear here once you finish them."
+            />
+          </Box>
+        ) : (
+          <TodoTable todos={completedItems} />
+        )}
+      </Tabs.Content>
     </Tabs.Root>
   );
 }

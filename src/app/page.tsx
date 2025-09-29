@@ -7,11 +7,11 @@ import { TodoTabs } from "@/components/todo/todo-tabs";
 
 export default function Page() {
   return (
-    <Flex direction="column" p="30px 50px" bg="bg.secondary" h="full">
-      <Stack bg="bg" rounded="10px">
+    <Flex direction="column" pt="30px" pb="50px" px="50px" flex="1">
+      <Stack flex="1" bg="bg" rounded="10px">
         <TodoHeader />
         <Separator borderColor="#CDD6E9" />
-        <Stack p="20px" gap="10px">
+        <Stack flex="1" p="20px" gap="10px">
           <HStack p="10px" bg="brand.aquaLight" rounded="6px">
             <TodoSearchbar />
             <Spacer />

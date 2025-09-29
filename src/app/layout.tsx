@@ -29,9 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider>
-          <Flex direction="column" h="full">
+          <Flex direction="column" minH="100vh">
             <Header />
-            <Flex direction="column" flex="1">
+            <Flex direction="column" minH="calc(100vh - 90px)">
               {children}
             </Flex>
           </Flex>
