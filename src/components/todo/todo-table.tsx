@@ -10,14 +10,21 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
-import { Flag } from "iconsax-reactjs";
+import { Flag, TaskSquare, Status, TickCircle } from "iconsax-reactjs";
 import type { Todo } from "@/types/todo";
+import {
+  MenuRoot,
+  MenuTrigger,
+  MenuContent,
+  MenuItem,
+} from "@/components/ui/menu";
 
 interface TodoTableProps {
   todos: Todo[];
+  onUpdateTodo: (id: string, updates: Partial<Omit<Todo, "id">>) => void;
 }
 
-export function TodoTable({ todos }: TodoTableProps) {
+export function TodoTable({ todos, onUpdateTodo }: TodoTableProps) {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "Urgent":
@@ -182,28 +189,117 @@ export function TodoTable({ todos }: TodoTableProps) {
                     </Text>
                   </HStack>
                   <Spacer />
-                  <IconButton
-                    aria-label="More actions"
-                    variant="surface"
-                    w="40px"
-                    h="30px"
-                    bg="bg.secondary"
-                    borderRadius="6px"
-                    boxShadow="none"
-                    textAlign="right"
-                  >
-                    <svg
-                      width="20"
-                      height="4"
-                      viewBox="0 0 20 4"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                  <MenuRoot>
+                    <MenuTrigger asChild>
+                      <IconButton
+                        aria-label="More actions"
+                        variant="surface"
+                        w="40px"
+                        h="30px"
+                        bg="bg.secondary"
+                        borderRadius="6px"
+                        boxShadow="none"
+                      >
+                        <svg
+                          width="20"
+                          height="4"
+                          viewBox="0 0 20 4"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle cx="2" cy="2" r="2" fill="#6C7278" />
+                          <circle cx="10" cy="2" r="2" fill="#6C7278" />
+                          <circle cx="18" cy="2" r="2" fill="#6C7278" />
+                        </svg>
+                      </IconButton>
+                    </MenuTrigger>
+                    <MenuContent
+                      minW="180px"
+                      p="4px"
+                      bg="white"
+                      border="1px solid #E2E8F0"
+                      borderRadius="8px"
+                      boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
                     >
-                      <circle cx="2" cy="2" r="2" fill="#6C7278" />
-                      <circle cx="10" cy="2" r="2" fill="#6C7278" />
-                      <circle cx="18" cy="2" r="2" fill="#6C7278" />
-                    </svg>
-                  </IconButton>
+                      {todo.status !== "todo" && (
+                        <MenuItem
+                          value="todo"
+                          onClick={() =>
+                            onUpdateTodo(todo.id, { status: "todo" })
+                          }
+                          p="8px 12px"
+                          borderRadius="6px"
+                          _hover={{ bg: "bg.secondary" }}
+                          cursor="pointer"
+                        >
+                          <HStack gap="8px">
+                            <TaskSquare
+                              size="16"
+                              color="#CFB7E8"
+                              variant="Bold"
+                            />
+                            <Text
+                              color="fg.muted"
+                              fontSize="14px"
+                              fontWeight="500"
+                            >
+                              Move to To Do
+                            </Text>
+                          </HStack>
+                        </MenuItem>
+                      )}
+                      {todo.status !== "in-progress" && (
+                        <MenuItem
+                          value="in-progress"
+                          onClick={() =>
+                            onUpdateTodo(todo.id, { status: "in-progress" })
+                          }
+                          p="8px 12px"
+                          borderRadius="6px"
+                          _hover={{ bg: "bg.secondary" }}
+                          cursor="pointer"
+                        >
+                          <HStack gap="8px">
+                            <Status size="16" color="#F6BE38" variant="Bold" />
+                            <Text
+                              color="fg.muted"
+                              fontSize="14px"
+                              fontWeight="500"
+                            >
+                              Move to In Progress
+                            </Text>
+                          </HStack>
+                        </MenuItem>
+                      )}
+                      {todo.status !== "complete" && (
+                        <MenuItem
+                          value="complete"
+                          onClick={() =>
+                            onUpdateTodo(todo.id, { status: "complete" })
+                          }
+                          p="8px 12px"
+                          borderRadius="6px"
+                          _hover={{ bg: "bg.secondary" }}
+                          cursor="pointer"
+                        >
+                          <HStack gap="8px">
+                            <TickCircle
+                              size="16"
+                              color="#75C5C1"
+                              variant="Bold"
+                            />
+                            <Text
+                              color="fg.muted"
+                              fontSize="14px"
+                              fontWeight="500"
+                            >
+                              Move to Complete
+                            </Text>
+                          </HStack>
+                        </MenuItem>
+                      )}
+                    </MenuContent>
+                  </MenuRoot>
                 </HStack>
               </Table.Cell>
             </Table.Row>

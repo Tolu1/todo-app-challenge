@@ -16,7 +16,7 @@ import { useTodos } from "@/hooks/use-todos";
 
 export function TodoTabs() {
   const [activeTab, setActiveTab] = useState("todo");
-  const { todos } = useTodos();
+  const { todos, updateTodo } = useTodos();
 
   const todoItems = todos.filter((todo) => todo.status === "todo");
   const inProgressItems = todos.filter((todo) => todo.status === "in-progress");
@@ -134,12 +134,12 @@ export function TodoTabs() {
           <Box pt="12vh" display="flex" justifyContent="center">
             <EmptyState
               icon={<TaskSquare size="48" color="#CFB7E8" variant="Bold" />}
-              title="Ready to Get Started"
-              description="Create your first task to start organizing your work."
+              title="No Tasks Here"
+              description="Create your a new task to start organizing your work."
             />
           </Box>
         ) : (
-          <TodoTable todos={todoItems} />
+          <TodoTable todos={todoItems} onUpdateTodo={updateTodo} />
         )}
       </Tabs.Content>
 
@@ -153,7 +153,7 @@ export function TodoTabs() {
             />
           </Box>
         ) : (
-          <TodoTable todos={inProgressItems} />
+          <TodoTable todos={inProgressItems} onUpdateTodo={updateTodo} />
         )}
       </Tabs.Content>
 
@@ -167,7 +167,7 @@ export function TodoTabs() {
             />
           </Box>
         ) : (
-          <TodoTable todos={completedItems} />
+          <TodoTable todos={completedItems} onUpdateTodo={updateTodo} />
         )}
       </Tabs.Content>
     </Tabs.Root>
