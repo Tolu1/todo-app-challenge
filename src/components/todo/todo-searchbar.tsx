@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Input, InputGroup } from "@chakra-ui/react";
-import { SearchNormal1, CloseCircle } from "iconsax-reactjs";
+import { SearchNormal1 } from "iconsax-reactjs";
 
 function TodoSearchbar() {
   return (
