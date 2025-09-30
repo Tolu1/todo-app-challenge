@@ -6,6 +6,10 @@ A modern todo management application built with Next.js, TypeScript, and Chakra 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Chakra UI](https://img.shields.io/badge/Chakra_UI-3.27.0-teal?logo=chakra-ui)](https://chakra-ui.com/)
 
+## Live Demo
+
+**[View Live App](https://todo-app-challenge-mu.vercel.app/)**
+
 ## Features
 
 ### Core Functionality
@@ -47,40 +51,40 @@ The application will start on [http://localhost:3000](http://localhost:3000)
 
 ## Project Structure
 
-```
+```bash
 todo-app-challenge/
 ├── src/
 │   ├── app/
-│   │   ├── page.tsx              # Main application page
-│   │   ├── layout.tsx            # Root layout
-│   │   └── providers.tsx         # Chakra UI provider setup
+│   │   ├── page.tsx                 # Main application page
+│   │   ├── layout.tsx               # Root layout
+│   │   └── providers.tsx            # Chakra UI provider setup
 │   ├── components/
 │   │   ├── todo/
-│   │   │   ├── todo-header.tsx   # Header with title
-│   │   │   ├── todo-searchbar.tsx # Search functionality
-│   │   │   ├── todo-table-view.tsx     # Tab-based table view
-│   │   │   ├── todo-table.tsx    # Todo table component
-│   │   │   ├── todo-kanban-view.tsx   # Kanban board view
-│   │   │   ├── todo-card.tsx     # Individual todo card
+│   │   │   ├── todo-header.tsx      # Header with title
+│   │   │   ├── todo-searchbar.tsx   # Search functionality
+│   │   │   ├── todo-table-view.tsx  # Tab-based table view
+│   │   │   ├── todo-table.tsx       # Todo table component
+│   │   │   ├── todo-kanban-view.tsx # Kanban board view
+│   │   │   ├── todo-card.tsx        # Individual todo card
 │   │   │   └── todo-view-toggle.tsx # View switcher
 │   │   └── ui/
-│   │       └── empty-state.tsx   # Empty state component
+│   │       └── empty-state.tsx      # Empty state component
 │   ├── hooks/
-│   │   ├── use-todos.ts          # Todo management hook
-│   │   └── use-local-storage.ts  # LocalStorage hook
+│   │   ├── use-todos.ts             # Todo management hook
+│   │   └── use-local-storage.ts     # LocalStorage hook
 │   ├── types/
-│   │   ├── todo.ts               # Todo type definitions
-│   │   └── user.ts               # User type definitions
+│   │   ├── todo.ts                  # Todo type definitions
+│   │   └── user.ts                  # User type definitions
 │   ├── data/
-│   │   ├── todos.ts              # Initial todo data
-│   │   └── users.ts              # User data
+│   │   ├── todos.ts                 # Initial todo data
+│   │   └── users.ts                 # User data
 │   ├── utils/
-│   │   └── todos-mapper.ts       # Kanban board data transformation
-│   └── theme.ts                  # Chakra UI theme customization
-├── public/                       # Static assets
+│   │   └── todos-mapper.ts          # Kanban board data transformation
+│   └── theme.ts                     # Chakra UI theme customization
+├── public/                          # Static assets
 ├── package.json
-├── tsconfig.json                 # TypeScript configuration
-├── next.config.ts                # Next.js configuration
+├── tsconfig.json                    # TypeScript configuration
+├── next.config.ts                   # Next.js configuration
 └── README.md
 ```
 
