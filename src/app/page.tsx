@@ -5,8 +5,8 @@ import { Flex, Stack, HStack, Separator, Spacer } from "@chakra-ui/react";
 import TodoHeader from "@/components/todo/todo-header";
 import TodoSearchbar from "@/components/todo/todo-searchbar";
 import TodoViewToggle from "@/components/todo/todo-view-toggle";
-import { TodoTabs } from "@/components/todo/todo-tabs";
-import { TodoKanban } from "@/components/todo/todo-kanban";
+import { TodoTableView } from "@/components/todo/todo-table-view";
+import { TodoKanbanView } from "@/components/todo/todo-kanban-view";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -36,7 +36,7 @@ export default function Page() {
             <Spacer />
             <TodoViewToggle view={view} onViewChange={handleViewChange} />
           </HStack>
-          {view === "table" ? <TodoTabs /> : <TodoKanban />}
+          {view === "table" ? <TodoTableView /> : <TodoKanbanView />}
         </Stack>
       </Stack>
     </Flex>

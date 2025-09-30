@@ -34,7 +34,7 @@ interface CardMove {
   position: number;
 }
 
-export function TodoKanban() {
+export function TodoKanbanView() {
   const { todos, updateTodo } = useTodos();
 
   const boardData = toBoard(todos);

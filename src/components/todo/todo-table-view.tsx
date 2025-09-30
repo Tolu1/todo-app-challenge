@@ -14,7 +14,7 @@ import { TodoTable } from "@/components/todo/todo-table";
 import { EmptyState } from "@/components/ui/empty-state";
 import { useTodos } from "@/hooks/use-todos";
 
-export function TodoTabs() {
+export function TodoTableView() {
   const [activeTab, setActiveTab] = useState("todo");
   const { todos, updateTodo } = useTodos();
 
