@@ -19,7 +19,14 @@ export default function Page() {
   };
 
   return (
-    <Flex direction="column" pt="30px" pb="50px" px="50px" flex="1">
+    <Flex
+      direction="column"
+      pt="30px"
+      pb="50px"
+      px="50px"
+      flex="1"
+      bg="bg.secondary"
+    >
       <Stack flex="1" bg="bg" rounded="10px">
         <TodoHeader />
         <Separator borderColor="#CDD6E9" />
