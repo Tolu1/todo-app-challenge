@@ -6,6 +6,8 @@ import {
   Select,
   createListCollection,
   Spacer,
+  Portal,
+  Box,
 } from "@chakra-ui/react";
 import {
   PaginationRoot,
@@ -15,6 +17,7 @@ import {
   PaginationFirstTrigger,
   PaginationLastTrigger,
 } from "@/components/ui/pagination";
+import { ArrowDown2 } from "iconsax-reactjs";
 
 const pageSizeOptions = createListCollection({
   items: [
@@ -64,28 +67,65 @@ export function TodoPagination({
       </PaginationRoot>
       <Spacer />
       <HStack gap="12px">
-        <Text fontSize="14px" fontWeight="500" color="fg.muted">
+        <Text
+          fontFamily="pagination"
+          fontSize="16px"
+          fontWeight="600"
+          lineHeight="normal"
+        >
           Rows Per page:
         </Text>
         <Select.Root
           collection={pageSizeOptions}
           value={[pageSize.toString()]}
           onValueChange={(e) => onPageSizeChange(Number(e.value[0]))}
-          size="sm"
-          width="80px"
+          w="86px"
         >
           <Select.Control>
-            <Select.Trigger>
-              <Select.ValueText />
+            <Select.Trigger
+              w="full"
+              h="40px"
+              borderWidth="1px"
+              borderColor="brand.aqua"
+              borderRadius="20px"
+              bg="bg.secondary"
+              display="flex"
+              flexDir="row"
+              px="20px"
+              py="15px"
+              position="relative"
+            >
+              <Text
+                w="35px"
+                fontFamily="pagination"
+                fontSize="14px"
+                fontWeight="600"
+                lineHeight="normal"
+              >
+                <Select.ValueText />
+              </Text>
+              <Box
+                position="absolute"
+                right="20px"
+                top="50%"
+                transform="translateY(-50%)"
+              >
+                <ArrowDown2 size="18px" color="#1A1C1E" />
+              </Box>
             </Select.Trigger>
           </Select.Control>
-          <Select.Content>
-            {pageSizeOptions.items.map((option) => (
-              <Select.Item item={option} key={option.value}>
-                {option.label}
-              </Select.Item>
-            ))}
-          </Select.Content>
+          <Portal>
+            <Select.Positioner>
+              <Select.Content>
+                {pageSizeOptions.items.map((option) => (
+                  <Select.Item item={option} key={option.value}>
+                    {option.label}
+                    <Select.ItemIndicator />
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Positioner>
+          </Portal>
         </Select.Root>
       </HStack>
     </HStack>
