@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   HStack,
   IconButton,
@@ -18,6 +19,7 @@ import {
   MenuContent,
   MenuItem,
 } from "@/components/ui/menu";
+import { TodoPagination } from "@/components/todo/todo-pagination";
 
 interface TodoTableProps {
   todos: Todo[];
@@ -25,6 +27,31 @@ interface TodoTableProps {
 }
 
 export function TodoTable({ todos, onUpdateTodo }: TodoTableProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const currentPage = parseInt(searchParams.get("page") || "1");
+  const pageSize = parseInt(searchParams.get("pageSize") || "10");
+
+  useEffect(() => {
+    console.log("Window scroll:", window.scrollY);
+    console.log("Document scroll:", document.documentElement.scrollTop);
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", page.toString());
+    router.push(`?${params.toString()}`);
+  };
+
+  const handlePageSizeChange = (pageSize: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("pageSize", pageSize.toString());
+    params.set("page", "1");
+    router.push(`?${params.toString()}`);
+  };
+
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "Urgent":
@@ -37,6 +64,10 @@ export function TodoTable({ todos, onUpdateTodo }: TodoTableProps) {
         return "#75C5C1";
     }
   };
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedTodos = todos.slice(startIndex, endIndex);
 
   return (
     <Stack flex="1" border="1px solid #CDD6E9" rounded="10px" overflow="hidden">
@@ -106,7 +137,7 @@ export function TodoTable({ todos, onUpdateTodo }: TodoTableProps) {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {todos.map((todo) => (
+          {paginatedTodos.map((todo) => (
             <Table.Row key={todo.id} h="80px" borderBottom="1px solid #CDD6E9">
               <Table.Cell pl="40px">
                 <Text
@@ -307,6 +338,13 @@ export function TodoTable({ todos, onUpdateTodo }: TodoTableProps) {
         </Table.Body>
       </Table.Root>
       <Spacer />
+      <TodoPagination
+        totalItems={todos.length}
+        currentPage={currentPage}
+        pageSize={pageSize}
+        onPageChange={handlePageChange}
+        onPageSizeChange={handlePageSizeChange}
+      />
     </Stack>
   );
 }

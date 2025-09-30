@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
 import { Header } from "@/components/header";
@@ -7,6 +7,11 @@ import { Flex } from "@chakra-ui/react";
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-jakarta-sans",
+  subsets: ["latin"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -22,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jakartaSans.className}`}>
+      <body className={`${jakartaSans.className} ${montserrat.variable}`}>
         <Provider>
           <Flex direction="column" minH="100vh">
             <Header />

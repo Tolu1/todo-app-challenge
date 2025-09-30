@@ -14,6 +14,11 @@ const config = defineConfig({
           orangeLight: { value: "#FBF4E4" },
         },
       },
+      fonts: {
+        pagination: {
+          value: "var(--font-montserrat)",
+        },
+      },
     },
     semanticTokens: {
       colors: {
